@@ -13,8 +13,8 @@ class Task:
         self.status:Status = status
 
     @staticmethod
-    def convertToScheduled(task:UnscheduledTask, startTime:time, endTime:time) -> ScheduledTask:
-        return ScheduledTask(task.title, task.description, task.status, startTime, endTime)
+    def convertToScheduled(task:UnscheduledTask, date:date, startTime:time, endTime:time) -> ScheduledTask:
+        return ScheduledTask(task.title, task.description, task.status, date, startTime, endTime)
     
     @staticmethod
     def convertToUnScheduled(task:ScheduledTask) -> UnscheduledTask:
@@ -25,8 +25,9 @@ class UnscheduledTask(Task):
         super().__init__(title, description, status)
 
 class ScheduledTask(Task):
-    def __init__(self, title:str, description:str, status:Status, startTime:time, endTime:time):
+    def __init__(self, title:str, description:str, status:Status, date:date, startTime:time, endTime:time):
         super().__init__(title, description, status)
+        self.date = date
         self.startTime = startTime
         self.endTime = endTime
 
@@ -58,14 +59,14 @@ class TaskList(list[ScheduledTask]):
             print(task.title)
             print(task.description)
             print(task.status)
-            print(f"{task.startTime.strftime("%H:%M:%S")} - {task.endTime.strftime("%H:%M:%S")}")
+            print(f"{task.date.strftime("%m-%d-%y")} | {task.startTime.strftime("%H:%M:%S")} - {task.endTime.strftime("%H:%M:%S")}")
             print()
 
 
 t = TaskList()
 
-t.append(ScheduledTask("Task 1", "Stuff", Status.NOT_STARTED, time.fromisoformat("07:15:00"), time.fromisoformat("08:00:00")))
-t.append(ScheduledTask("Task 2", "More Stuff", Status.IN_PROGRESS, time.fromisoformat("08:00:00"), time.fromisoformat("08:30:00")))
-t.append(ScheduledTask("Task 3", "Even More Stuff", Status.IN_PROGRESS, time.fromisoformat("08:30:00"), time.fromisoformat("08:45:00")))
+t.append(ScheduledTask("Task 1", "Stuff", Status.NOT_STARTED, date.today(), time.fromisoformat("07:15:00"), time.fromisoformat("08:00:00")))
+t.append(ScheduledTask("Task 2", "More Stuff", Status.IN_PROGRESS, date.today(), time.fromisoformat("08:00:00"), time.fromisoformat("08:30:00")))
+t.append(ScheduledTask("Task 3", "Even More Stuff", Status.IN_PROGRESS, date.today(), time.fromisoformat("08:30:00"), time.fromisoformat("08:45:00")))
 
 t.displayTasks()
