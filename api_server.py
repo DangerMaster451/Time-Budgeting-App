@@ -6,10 +6,7 @@ from session import Session, SessionList
 import json
 import uuid
 
-task_list = TaskList()
 session_list = SessionList()
-
-task_list.append(ScheduledTask(title="Task 1", description="This is task 1", status=Status.NOT_STARTED, date=date(2026, 3, 2), startTime=time(9, 0), endTime=time(10, 0)))
 
 app = FastAPI()
 
@@ -33,14 +30,22 @@ async def log_in(request:Request, username:str, password:str):
 async def tasks(request:Request, token:uuid.UUID):
     v = session_list.validateSession(request, token)
     if v:
-        return { "message":task_list }
+        with open("users.json", "r") as file:
+            data = json.load(file)
+            id = data[session_list[token].username]["id"]
+            
+        with open("tasks.json", "r") as file:
+            data = json.load(file)
+            tasks = data[id]["tasks"]
+
+        return { "message":tasks }
     else:
         return {"validated ": v}
 
-@app.post("/add-task")
-async def add_task(task:ScheduledTask):
-    try:
-        task_list.append(task)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    return { "message": "Task added successfully" }
+#@app.post("/add-task")
+#async def add_task(task:ScheduledTask):
+#    try:
+#        task_list.append(task)
+#    except ValueError as e:
+#        raise HTTPException(status_code=400, detail=str(e))
+#    return { "message": "Task added successfully" }

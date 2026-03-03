@@ -26,15 +26,10 @@ def getTasks(token:uuid.UUID):
     else:
         raise ConnectionError(f"{r.status_code}:{r.json()["detail"]}")
 
-
-
-
-
-
 while True:
     try:
         session = login()
-        token = uuid.UUID(session["token"])
+        token = uuid.UUID(session["token"]) #type: ignore
         break
     except ConnectionError as e:
         print(e)
