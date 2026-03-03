@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from tasks import Task, UnscheduledTask, ScheduledTask, TaskList, Status
 from datetime import date, time
+import json
 
 task_list = TaskList()
 
@@ -12,6 +13,18 @@ app = FastAPI()
 @app.get("/")
 async def root():
     return { "message": "Home" }
+
+@app.post("/log-in")
+async def log_in(username:str, password:str):
+    with open("users.json", "r") as file:
+        users = json.load(file)
+        if username in users:
+            if users[username]["password"] == password:
+                return { "message":"successfully logged in!"}
+            else:
+                raise HTTPException(status_code=403, detail=f"Incorrect Password, try '{users[username]["password"]}'")
+        else:
+            raise HTTPException(status_code=404, detail="User not found :/")
 
 @app.get("/all-tasks")
 async def tasks():
