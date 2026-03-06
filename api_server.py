@@ -11,11 +11,42 @@ session_list = SessionList()
 
 app = FastAPI()
 
-def validate_password(username:str, password:str, users) -> bool:
+def validate_new_username(username:str) -> bool:
+    with open("users.json", "r") as file:
+        data = json.load(file)
+        if username in data:
+            return False
+        return True
+
+def hash_new_password(password:str) -> bytes:
+    salt = bcrypt.gensalt()
+    hash = bcrypt.hashpw(password.encode("utf-8"), salt)
+    return hash
+
+def check_user_password(username:str, password:str, users) -> bool:
     stored_password = users[username]["password"].encode("utf-8")
-    #print(f"User Password: {hash}")
-    print(f"Stored Password: {stored_password}")
     return bcrypt.checkpw(password.encode("utf-8"), stored_password)
+
+def updateUsersFile(validUsername:str, hash:bytes, uuid:uuid.UUID):
+    with open("users.json", "r+") as file:
+        fileData = json.load(file)
+        fileData[validUsername] = {
+                "password": hash.decode("utf-8"),
+                "id": str(uuid)
+            }
+        file.seek(0)
+        json.dump(fileData, file, indent=4)
+
+def updateTasksFile(uuid:uuid.UUID, validUsername:str):
+    with open("tasks.json", "r+") as file:
+        fileData = json.load(file)
+        fileData[str(uuid)] = {
+            "username": validUsername,
+            "tasks": []
+        }
+        file.seek(0)
+        json.dump(fileData, file, indent=4)
+
 
 @app.get("/")
 async def root():
@@ -23,25 +54,19 @@ async def root():
 
 @app.post("/new-user")
 async def new_user(request:Request, username, password):
-    with open("users.json", "r") as file:
-        users = json.load(file)
-    salt = bcrypt.gensalt()
-    hash = bcrypt.hashpw(password.encode("utf-8"), salt)
+    if validate_new_username(username) == False:
+        raise HTTPException(status_code=403, detail="Username already exists")
+    hash = hash_new_password(password)
+    id = uuid.uuid4()
+    updateUsersFile(username, hash, id)
+    updateTasksFile(id, username)
 
-    userData = {
-        "password": hash.decode("utf-8"),
-        "id": str(uuid.uuid4())
-    }
-
-    users[username] = userData
-    with open("users.json", "w") as file:
-        file.write(json.dumps(users, indent=4))
 
 @app.post("/log-in")
 async def log_in(request:Request, username:str, password:str):
     with open("users.json", "r") as file:
         users = json.load(file)
-        if username in users and validate_password(username, password, users):
+        if username in users and check_user_password(username, password, users):
             return { "session":Session(username, request.client.host, session_list)} #type:ignore
         else:
                 raise HTTPException(status_code=403, detail=f"Invalid login")
