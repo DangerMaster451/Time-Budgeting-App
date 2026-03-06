@@ -21,6 +21,22 @@ def validate_password(username:str, password:str, users) -> bool:
 async def root():
     return { "message": "Home" }
 
+@app.post("/new-user")
+async def new_user(request:Request, username, password):
+    with open("users.json", "r") as file:
+        users = json.load(file)
+    salt = bcrypt.gensalt()
+    hash = bcrypt.hashpw(password.encode("utf-8"), salt)
+
+    userData = {
+        "password": hash.decode("utf-8"),
+        "id": str(uuid.uuid4())
+    }
+
+    users[username] = userData
+    with open("users.json", "w") as file:
+        file.write(json.dumps(users, indent=4))
+
 @app.post("/log-in")
 async def log_in(request:Request, username:str, password:str):
     with open("users.json", "r") as file:
