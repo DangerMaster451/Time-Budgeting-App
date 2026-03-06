@@ -1,6 +1,10 @@
 {
     "andrew":{
-        "password":"password123",
+        "password":"$2b$12$GsrmYBaKBt6thid1h7aTr.Kq.N.vEPYcvoL1GL.Jlt.emsoXIBCX2",
         "id":"1"
+    },
+    "bob":{
+        "password":"goodpassword",
+        "id":"2"
     }
 }

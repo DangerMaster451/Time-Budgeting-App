@@ -5,10 +5,17 @@ from datetime import date, time, datetime, timedelta
 from session import Session, SessionList
 import json
 import uuid
+import bcrypt
 
 session_list = SessionList()
 
 app = FastAPI()
+
+def validate_password(username:str, password:str, users) -> bool:
+    stored_password = users[username]["password"].encode("utf-8")
+    #print(f"User Password: {hash}")
+    print(f"Stored Password: {stored_password}")
+    return bcrypt.checkpw(password.encode("utf-8"), stored_password)
 
 @app.get("/")
 async def root():
@@ -18,13 +25,10 @@ async def root():
 async def log_in(request:Request, username:str, password:str):
     with open("users.json", "r") as file:
         users = json.load(file)
-        if username in users:
-            if users[username]["password"] == password:
-                return { "session":Session(username, request.client.host, session_list)} #type:ignore
-            else:
-                raise HTTPException(status_code=403, detail=f"Incorrect Password, try '{users[username]["password"]}'")
+        if username in users and validate_password(username, password, users):
+            return { "session":Session(username, request.client.host, session_list)} #type:ignore
         else:
-            raise HTTPException(status_code=404, detail="User not found :/")
+                raise HTTPException(status_code=403, detail=f"Invalid login")
 
 @app.get("/all-tasks")
 async def tasks(request:Request, token:uuid.UUID):
