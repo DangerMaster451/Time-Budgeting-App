@@ -87,10 +87,29 @@ async def tasks(request:Request, token:uuid.UUID):
     else:
         return {"validated ": v}
 
-#@app.post("/add-task")
-#async def add_task(task:ScheduledTask):
-#    try:
-#        task_list.append(task)
-#    except ValueError as e:
-#        raise HTTPException(status_code=400, detail=str(e))
-#    return { "message": "Task added successfully" }
+@app.post("/add-task")
+async def add_task(request:Request, token:uuid.UUID, title:str, description:str, status:str, date:str, startTime:str, endTime:str):
+    v = session_list.validateSession(request, token)
+    if not v:
+        raise HTTPException(status_code=403, detail="Invalid login")
+    
+    with open("users.json", "r") as file:
+        data = json.load(file)
+        id = data[session_list[token].username]["id"]
+    
+    with open("tasks.json", "r+") as file:
+        data = json.load(file)
+
+        newTask = {
+                "title":title,
+                "description":description,
+                "status":status,
+                "date":date,
+                "startTime":startTime,
+                "endTime":endTime
+            }
+
+        data[id]["tasks"].append(newTask)
+        file.seek(0)
+        
+        json.dump(data, file, indent=4)

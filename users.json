@@ -1,30 +1,14 @@
 {
-    "andrew": {
-        "password": "$2b$12$GsrmYBaKBt6thid1h7aTr.Kq.N.vEPYcvoL1GL.Jlt.emsoXIBCX2",
-        "id": "1"
-    },
     "bob": {
-        "password": "goodpassword",
-        "id": "2"
+        "password": "$2b$12$YrE9N9UZztrrmTYslz7eHufjMkPuOnAV4.STFSNhLOxCjVFyzQpP.",
+        "id": "f8d33b1e-330c-41a2-92e6-652abbfdcbe7"
     },
-    "timmy": {
-        "password": "$2b$12$wGDM8mmQyuirukoSmJbrUut3xN2t9ff8KPEH/QDs6Zq81si8XWRGi",
-        "id": "7af4241c-e096-4636-99fc-7b58f2108f15"
+    "john": {
+        "password": "$2b$12$gIv/XGKFXUmIp2w7R.qvV.0u8KnIw7qVggEncAGu1fuq4DVCCaV9O",
+        "id": "129f9704-3930-450b-8eca-e23f21b17e38"
     },
-    "jonney": {
-        "password": "$2b$12$RlpXBYabUK9155qoe3rgZO1QkeCMwgzz3fTEz3Xr4nu9FgunoclIO",
-        "id": "c8334246-30e3-4cc5-8a04-6605dcf517b7"
-    },
-    "jimmathy": {
-        "password": "$2b$12$d9jF1erCGtVUXnNdF0jqNOrwg2YAcUXUilBl6dK0MgZ9zFH01JDVO",
-        "id": "47107a4a-ee32-4ffc-9502-13b5cf7f57b7"
-    },
-    "math": {
-        "password": "$2b$12$Rs04lrSAzaRIYGWrceGU.eu7HLgZ3FvR4nVWea2MTYBjEyXyztq/m",
-        "id": "a7d01f0b-8048-4a41-8390-81f87c1f3e40"
-    },
-    "seven7": {
-        "password": "$2b$12$lQ9Z.2hak2YAes2Q8cfE5.7YoRDu18JRZMXGZBVfRYKoomXGcQTDu",
-        "id": "26f8658d-2d5c-4290-b786-d351161a1e9d"
+    "john2": {
+        "password": "$2b$12$nvmBlfCtYFM3vP3wJ4W2b.32DJif9tkq/Pgi5LH2f86mOqhBoBQU6",
+        "id": "8021b397-f56d-47ad-9d51-e629f1a2d73a"
     }
 }

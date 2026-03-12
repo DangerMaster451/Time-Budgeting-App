@@ -1,40 +1,44 @@
 {
-    "1": {
-        "username: ": "andrew",
+    "129f9704-3930-450b-8eca-e23f21b17e38": {
+        "username": "john",
         "tasks": [
             {
-                "title": "Garbage",
-                "description": "It's smelly",
+                "title": "testTask",
+                "description": "an exciting task",
                 "status": "not started",
-                "date": "3-2-2026",
-                "startTime": "08:00:00",
-                "endTime": "08:05:00"
+                "date": "11-12-12",
+                "startTime": "10:30",
+                "endTime": "11:30"
             },
             {
-                "title": "Wash the dog",
-                "description": "He's smelly",
+                "title": "another task",
+                "description": "an exciting task",
                 "status": "not started",
-                "date": "3-2-2026",
-                "startTime": "10:00:00",
-                "endTime": "10:30:00"
+                "date": "11-12-12",
+                "startTime": "10:30",
+                "endTime": "11:30"
             }
         ]
     },
-    "2": {
-        "username: ": "bob",
+    "8021b397-f56d-47ad-9d51-e629f1a2d73a": {
+        "username": "john2",
         "tasks": [
             {
-                "title": "Shower",
-                "description": "I'm smelly",
+                "title": "Take out the trash",
+                "description": "it smells bad",
                 "status": "not started",
-                "date": "3-2-2026",
-                "startTime": "11:00:00",
-                "endTime": "11:30:00"
+                "date": "3-11-26",
+                "startTime": "10:30",
+                "endTime": "10:35"
+            },
+            {
+                "title": "Make the bed",
+                "description": "it's messy",
+                "status": "not started",
+                "date": "3-11-26",
+                "startTime": "7:30",
+                "endTime": "7:45"
             }
         ]
-    },
-    "26f8658d-2d5c-4290-b786-d351161a1e9d": {
-        "username": "seven7",
-        "tasks": []
     }
 }

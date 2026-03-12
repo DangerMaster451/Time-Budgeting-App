@@ -15,11 +15,10 @@ class SessionList(dict[uuid.UUID, Session]):
         super().__init__(self)
 
     def validateSession(self, request:Request, session_id:uuid.UUID) -> bool:
-        #if self[session_id]:
-        #    session = self[session_id]
-        #else:
-        #    return False
-        session = self[session_id]
+        if session_id in self:
+            session = self[session_id]
+        else:
+            return False
         if session.expireTime < datetime.now():
             print("session expired")
             return False
