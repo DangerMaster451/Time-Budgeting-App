@@ -4,6 +4,7 @@ from datetime import date, time, datetime, timedelta
 from AuthService import Session, SessionList, Auth
 from DataService import DataService
 from UserService import UserService
+from TaskService import ScheduledTask, Task, TaskList, Status
 import uuid
 
 app = FastAPI()
@@ -29,7 +30,7 @@ async def get_tasks(request:Request, session_token:uuid.UUID):
     return DataService.get_user_tasks(id)
     
 @app.post("/add-task", status_code=201)
-async def add_task(request:Request, session_token:uuid.UUID, title:str, description:str, status:str, date:str, startTime:str, endTime:str):
+async def add_task(request:Request, session_token:uuid.UUID, scheduledTask:ScheduledTask):
     session = Auth.validate_session(request, session_token, DataService.get_sessions())
     id = session.id
-    DataService.new_task(id, title, description, status, date, startTime, endTime)
+    DataService.new_task(id, scheduledTask)
