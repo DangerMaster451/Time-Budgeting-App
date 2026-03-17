@@ -5,9 +5,9 @@ from datetime import datetime, timedelta
 from fastapi import Request, HTTPException
 
 class Session():
-    def __init__(self, username:str, ip:str, id:uuid.UUID):
-        self.token = uuid.uuid4()
-        self.expireTime:datetime = datetime.now() + timedelta(minutes=30)
+    def __init__(self, token:uuid.UUID, expireTime:datetime, username:str, ip:str, id:uuid.UUID):
+        self.token = token
+        self.expireTime:datetime = expireTime
         self.username:str = username
         self.ip:str = ip
         self.id:uuid.UUID = id
@@ -18,15 +18,21 @@ class SessionList(dict[uuid.UUID, Session]):
     
 class Auth():
     @staticmethod
+    def new_session():
+         #
+         pass
+    
+
+    @staticmethod
     def validate_session(request:Request, user_token:uuid.UUID, active_sessions:list[Session]) -> Session:
         for s in active_sessions:
-            if user_token == s.token:
+            if str(user_token) == str(s.token):
                 session = s
                 break
         else:            
             raise HTTPException(403, "Session Not Found")
-        if session.expireTime < datetime.now():
-            raise HTTPException(403, "Session Expired")
+        #if session.expireTime < datetime.now():
+        #    raise HTTPException(403, "Session Expired")
         if request.client.host != session.ip: #type: ignore
             print("host doesn't match stored ip")
             raise HTTPException(403, "Session does not match IP, please log in again")
@@ -60,5 +66,5 @@ class Auth():
             if not Auth.validate_password(username, password, users):
                 raise HTTPException(status_code=403, detail=f"Invalid Password")
             
-            return Session(username, request.client.host, users[username]["id"]) #type:ignore
+            return Session(uuid.uuid4(), datetime.now() + timedelta(minutes=30), username, request.client.host, users[username]["id"]) #type:ignore
                     

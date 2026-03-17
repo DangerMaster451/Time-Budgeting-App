@@ -6,8 +6,6 @@ from DataService import DataService
 from UserService import UserService
 import uuid
 
-session_list = []
-
 app = FastAPI()
 
 @app.get("/", status_code=200)
@@ -21,17 +19,17 @@ async def new_user(request:Request, username:str, password:str):
 @app.post("/log-in", status_code=200)
 async def log_in(request:Request, username:str, password:str):
     session = Auth.login(request, username, password)
-    session_list.append(session)
+    DataService.new_session(session)
     return { "session":session }
         
 @app.get("/get-tasks", status_code=200)
 async def get_tasks(request:Request, session_token:uuid.UUID):
-    session = Auth.validate_session(request, session_token, session_list)
+    session = Auth.validate_session(request, session_token, DataService.get_sessions())
     id = session.id
     return DataService.get_user_tasks(id)
     
 @app.post("/add-task", status_code=201)
 async def add_task(request:Request, session_token:uuid.UUID, title:str, description:str, status:str, date:str, startTime:str, endTime:str):
-    session = Auth.validate_session(request, session_token, session_list)
+    session = Auth.validate_session(request, session_token, DataService.get_sessions())
     id = session.id
     DataService.new_task(id, title, description, status, date, startTime, endTime)

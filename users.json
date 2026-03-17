@@ -2,5 +2,9 @@
     "andrew": {
         "password": "$2b$12$scKaXdCcWYuoA./Xyh.PgeIEVlJKh9f1CiHllr8VQL6FhloceS/6m",
         "id": "1023a413-a2c5-4e47-ab2b-bbcf71ed61ab"
+    },
+    "brian": {
+        "password": "$2b$12$F/d7lI6t7I.40oYZKVjyyul1mvw5pRxgRV2VGo.hLTHPG.cYw.XBS",
+        "id": "e5966b65-5b7f-4f02-904a-35e664e9c1ab"
     }
 }

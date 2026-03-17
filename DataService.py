@@ -23,12 +23,6 @@ class DataService():
             }
             file.seek(0)
             json.dump(fileData, file, indent=4)        
-
-    #@staticmethod
-    #def get_user_id(token:uuid.UUID, sessions:list[Session]):
-    #    with open("users.json", "r") as file:
-    #        data = json.load(file)
-    #        return data[sessions[token].username]["id"]
         
     @staticmethod 
     def get_user_tasks(id):
@@ -54,3 +48,28 @@ class DataService():
             file.seek(0)
             
             json.dump(data, file, indent=4)
+
+    @staticmethod
+    def new_session(session:Session):
+        with open("sessions.json", "r+") as file:
+            data = json.load(file)
+            data.append(
+                {
+                    "token":str(session.token),
+                    "expireTime":str(session.expireTime),
+                    "username":session.username,
+                    "ip":session.ip,
+                    "id":str(session.id)
+                }
+            )
+            file.seek(0)
+            json.dump(data, file, indent=4)
+
+    @staticmethod
+    def get_sessions():
+        with open("sessions.json", "r") as file:
+            data = json.load(file)
+            sessions:list[Session] = []
+            for s in data:
+                sessions.append(Session(s["token"], s["expireTime"], s["username"], s["ip"], s["id"]))
+            return sessions

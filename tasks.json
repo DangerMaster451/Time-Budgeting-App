@@ -11,5 +11,18 @@
                 "endTime": "11:00"
             }
         ]
+    },
+    "e5966b65-5b7f-4f02-904a-35e664e9c1ab": {
+        "username": "brian",
+        "tasks": [
+            {
+                "title": "My new task",
+                "description": "a task of great importance",
+                "status": "not started",
+                "date": "3-16-26",
+                "startTime": "10:00",
+                "endTime": "11:00"
+            }
+        ]
     }
 }
