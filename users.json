@@ -1,14 +1,6 @@
 {
-    "bob": {
-        "password": "$2b$12$YrE9N9UZztrrmTYslz7eHufjMkPuOnAV4.STFSNhLOxCjVFyzQpP.",
-        "id": "f8d33b1e-330c-41a2-92e6-652abbfdcbe7"
-    },
-    "john": {
-        "password": "$2b$12$gIv/XGKFXUmIp2w7R.qvV.0u8KnIw7qVggEncAGu1fuq4DVCCaV9O",
-        "id": "129f9704-3930-450b-8eca-e23f21b17e38"
-    },
-    "john2": {
-        "password": "$2b$12$nvmBlfCtYFM3vP3wJ4W2b.32DJif9tkq/Pgi5LH2f86mOqhBoBQU6",
-        "id": "8021b397-f56d-47ad-9d51-e629f1a2d73a"
+    "andrew": {
+        "password": "$2b$12$scKaXdCcWYuoA./Xyh.PgeIEVlJKh9f1CiHllr8VQL6FhloceS/6m",
+        "id": "1023a413-a2c5-4e47-ab2b-bbcf71ed61ab"
     }
 }

@@ -1,43 +1,14 @@
 {
-    "129f9704-3930-450b-8eca-e23f21b17e38": {
-        "username": "john",
+    "1023a413-a2c5-4e47-ab2b-bbcf71ed61ab": {
+        "username": "andrew",
         "tasks": [
             {
-                "title": "testTask",
-                "description": "an exciting task",
+                "title": "Walk the dog",
+                "description": "he needs exercise",
                 "status": "not started",
-                "date": "11-12-12",
+                "date": "3-16-2026",
                 "startTime": "10:30",
-                "endTime": "11:30"
-            },
-            {
-                "title": "another task",
-                "description": "an exciting task",
-                "status": "not started",
-                "date": "11-12-12",
-                "startTime": "10:30",
-                "endTime": "11:30"
-            }
-        ]
-    },
-    "8021b397-f56d-47ad-9d51-e629f1a2d73a": {
-        "username": "john2",
-        "tasks": [
-            {
-                "title": "Take out the trash",
-                "description": "it smells bad",
-                "status": "not started",
-                "date": "3-11-26",
-                "startTime": "10:30",
-                "endTime": "10:35"
-            },
-            {
-                "title": "Make the bed",
-                "description": "it's messy",
-                "status": "not started",
-                "date": "3-11-26",
-                "startTime": "7:30",
-                "endTime": "7:45"
+                "endTime": "11:00"
             }
         ]
     }
