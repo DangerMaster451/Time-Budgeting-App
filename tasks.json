@@ -88,6 +88,15 @@
                 "date": "2020-07-14",
                 "startTime": "11:30:00",
                 "endTime": "12:30:00"
+            },
+            {
+                "__type__": "ScheduledTask",
+                "title": "Another exelecnt task",
+                "description": "the task to rule them all",
+                "status": "Status.IN_PROGRESS",
+                "date": "2020-07-14",
+                "startTime": "11:30:00",
+                "endTime": "12:30:00"
             }
         ]
     }
