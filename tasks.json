@@ -49,5 +49,46 @@
                 "endTime": "19:52:25.036000+00:00"
             }
         ]
+    },
+    "73a3ad52-de0d-4654-9b94-bb95cfca8512": {
+        "username": "peter",
+        "tasks": [
+            {
+                "__type__": "ScheduledTask",
+                "title": "My First Task",
+                "description": "It's awesome",
+                "status": "Status.NOT_STARTED",
+                "date": "2026-03-23",
+                "startTime": "23:23:32.608000+00:00",
+                "endTime": "23:23:32.608000+00:00"
+            },
+            {
+                "__type__": "ScheduledTask",
+                "title": "My Second Task",
+                "description": "It's even more awesome",
+                "status": "Status.NOT_STARTED",
+                "date": "2026-04-23",
+                "startTime": "23:23:32.608000+00:00",
+                "endTime": "23:23:32.608000+00:00"
+            },
+            {
+                "__type__": "ScheduledTask",
+                "title": "A great new task",
+                "description": "the task to rule them all",
+                "status": "Status.IN_PROGRESS",
+                "date": "2019-12-04",
+                "startTime": "10:00:00",
+                "endTime": "10:30:00"
+            },
+            {
+                "__type__": "ScheduledTask",
+                "title": "Another exelecnt task",
+                "description": "the task to rule them all",
+                "status": "Status.IN_PROGRESS",
+                "date": "2020-07-14",
+                "startTime": "11:30:00",
+                "endTime": "12:30:00"
+            }
+        ]
     }
 }

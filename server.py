@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException, Request
-from pydantic import BaseModel
-from datetime import date, time, datetime, timedelta
+import datetime
 from AuthService import Session, SessionList, Auth
 from DataService import DataService
 from UserService import UserService
@@ -26,11 +25,18 @@ async def log_in(request:Request, username:str, password:str):
 @app.get("/get-tasks", status_code=200)
 async def get_tasks(request:Request, session_token:uuid.UUID):
     session = Auth.validate_session(request, session_token, DataService.get_sessions())
-    id = session.id
-    return DataService.get_user_tasks(id)
+    return DataService.get_user_tasks(session.id)
     
 @app.post("/add-task", status_code=201)
-async def add_task(request:Request, session_token:uuid.UUID, scheduledTask:ScheduledTask):
+async def add_task(request:Request, session_token:uuid.UUID, title:str, description:str, status:Status, date:str, startTime:str, endTime:str):
     session = Auth.validate_session(request, session_token, DataService.get_sessions())
-    id = session.id
-    DataService.new_task(id, scheduledTask)
+
+    task = ScheduledTask(
+        title,
+        description,
+        status,
+        datetime.date.fromisoformat(date),
+        datetime.time.fromisoformat(startTime),
+        datetime.time.fromisoformat(endTime)
+        )
+    DataService.new_task(session.id, task)

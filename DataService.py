@@ -1,5 +1,7 @@
 import json
 import uuid
+from datetime import datetime
+from dateutil import parser
 from AuthService import Session
 from TaskService import Task, TaskList, ScheduledTask, Status
 
@@ -28,7 +30,7 @@ class DataService():
     def get_user_tasks(id):
         with open("tasks.json", "r") as file:
             data = json.load(file)
-            tasks = data[id]["tasks"]
+            tasks = decodeTasks(data[id]["tasks"])
             return tasks
         
     @staticmethod
@@ -91,7 +93,23 @@ class JSONEncoder(json.JSONEncoder):
             return str(o)
         return super().default(o)
 
-def JSONDecoder(data):
-    if "__type__" in data:
-        object_type = data["__type__"]
-        value = data[""]
+def decodeTasks(data) -> list[Task]:
+    print(data)
+    print(type(data))
+    tasks = []
+    for item in data:
+        if item["__type__"] == "Task":
+            title = item["title"]
+            description = item["description"]
+            status = Status.convertFromString(item["status"])
+            tasks.append(Task(title, description, status))
+        elif item["__type__"] == "ScheduledTask":
+            title = item["title"]
+            description = item["description"]
+            status = Status.convertFromString(item["status"])
+            date = parser.parse(item["date"])
+            startTime = parser.parse(item["startTime"])
+            endTime = parser.parse(item["endTime"])
+            tasks.append(ScheduledTask(title, description, status, date, startTime, endTime))
+
+    return tasks
