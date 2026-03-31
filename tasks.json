@@ -99,5 +99,25 @@
                 "endTime": "12:30:00"
             }
         ]
+    },
+    "3caea053-a3ea-42a8-a27b-682e688c9b78": {
+        "username": "john",
+        "tasks": [
+            {
+                "__type__": "ScheduledTask",
+                "title": "First Task",
+                "description": "basic task",
+                "status": "Status.NOT_STARTED",
+                "date": "2026-03-26",
+                "startTime": "10:00:00",
+                "endTime": "11:00:00"
+            },
+            {
+                "__type__": "Task",
+                "title": "test",
+                "description": "test",
+                "status": "Status.NOT_STARTED"
+            }
+        ]
     }
 }

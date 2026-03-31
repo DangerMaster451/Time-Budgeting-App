@@ -10,5 +10,9 @@
     "peter": {
         "password": "$2b$12$noA3uPXJwcdU7JyzQQ6gSuT9CIkuGM/e6QsMb9Mv0AUdFYwrikzni",
         "id": "73a3ad52-de0d-4654-9b94-bb95cfca8512"
+    },
+    "john": {
+        "password": "$2b$12$GsV2YuOR79y2AIOhqBOTMe5urpbtoIc7WANQSplHA303ZGnxUzRde",
+        "id": "3caea053-a3ea-42a8-a27b-682e688c9b78"
     }
 }

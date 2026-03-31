@@ -3,7 +3,7 @@ import datetime
 from AuthService import Session, SessionList, Auth
 from DataService import DataService
 from UserService import UserService
-from TaskService import ScheduledTask, Task, TaskList, Status
+from TaskService import UnscheduledTask, ScheduledTask, Task, TaskList, Status
 from EncourageService import EncourageService
 import uuid
 
@@ -28,8 +28,8 @@ async def get_tasks(request:Request, session_token:uuid.UUID):
     session = Auth.validate_session(request, session_token, DataService.get_sessions())
     return DataService.get_user_tasks(session.id)
     
-@app.post("/add-task", status_code=201)
-async def add_task(request:Request, session_token:uuid.UUID, title:str, description:str, status:Status, date:str, startTime:str, endTime:str):
+@app.post("/add-scheduled-task", status_code=201)
+async def add_scheduled_task(request:Request, session_token:uuid.UUID, title:str, description:str, status:Status, date:str, startTime:str, endTime:str):
     session = Auth.validate_session(request, session_token, DataService.get_sessions())
 
     task = ScheduledTask(
@@ -41,6 +41,14 @@ async def add_task(request:Request, session_token:uuid.UUID, title:str, descript
         datetime.time.fromisoformat(endTime)
         )
     DataService.new_task(session.id, task)
+
+@app.post("/add-unscheduled-task", status_code=201)
+async def add_unscheduled_task(request:Request, session_token:uuid.UUID, title:str, description:str, status:Status):
+    session = Auth.validate_session(request, session_token, DataService.get_sessions())
+
+    task = UnscheduledTask(title, description, status)
+    DataService.new_task(session.id, task)
+
 
 @app.get("/get-encouragement", status_code=200)
 async def getEncouragement(request:Request, session_token:uuid.UUID):

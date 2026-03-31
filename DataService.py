@@ -34,10 +34,10 @@ class DataService():
             return tasks
         
     @staticmethod
-    def new_task(user_id:uuid.UUID, scheduledTask:ScheduledTask):
+    def new_task(user_id:uuid.UUID, task:Task):
         with open("tasks.json", "r+") as file:
             data = json.load(file)
-            data[user_id]["tasks"].append(scheduledTask)
+            data[user_id]["tasks"].append(task)
             file.seek(0)
             json.dump(data, file, indent=4, cls=JSONEncoder)
 

@@ -40,5 +40,12 @@
         "username": "peter",
         "ip": "127.0.0.1",
         "id": "73a3ad52-de0d-4654-9b94-bb95cfca8512"
+    },
+    {
+        "token": "74f9271c-9f65-43a2-9a8c-a475a61aef75",
+        "expireTime": "2026-03-31 17:01:53.134845",
+        "username": "john",
+        "ip": "127.0.0.1",
+        "id": "3caea053-a3ea-42a8-a27b-682e688c9b78"
     }
 ]
