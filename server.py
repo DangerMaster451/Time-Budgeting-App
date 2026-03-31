@@ -4,6 +4,7 @@ from AuthService import Session, SessionList, Auth
 from DataService import DataService
 from UserService import UserService
 from TaskService import ScheduledTask, Task, TaskList, Status
+from EncourageService import EncourageService
 import uuid
 
 app = FastAPI()
@@ -40,3 +41,8 @@ async def add_task(request:Request, session_token:uuid.UUID, title:str, descript
         datetime.time.fromisoformat(endTime)
         )
     DataService.new_task(session.id, task)
+
+@app.get("/get-encouragement", status_code=200)
+async def getEncouragement(request:Request, session_token:uuid.UUID):
+    session = Auth.validate_session(request, session_token, DataService.get_sessions())
+    return EncourageService.giveEncouragement()
